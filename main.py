@@ -1,7 +1,6 @@
 import streamlit as st
 import altair as alt
 import pandas as pd
-import matplotlib.pyplot as plt
 import numpy as np
 import pickle
 import pandas as pd
@@ -23,7 +22,6 @@ from sklearn.linear_model import Perceptron
 from sklearn.neural_network import MLPClassifier
 from sklearn.ensemble import RandomForestClassifier
 
-
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import f1_score
@@ -33,12 +31,6 @@ from sklearn.metrics import roc_curve
 from sklearn.metrics import roc_auc_score
 from sklearn.metrics import auc
 
-import matplotlib.pyplot as plt
-import matplotlib.mlab as mlab
-import matplotlib
-plt.style.use('ggplot')
-from matplotlib.pyplot import figure
-from IPython.core.pylabtools import figsize
 import itertools
 from sklearn.datasets import make_friedman1
 from sklearn.feature_selection import RFE
@@ -53,8 +45,6 @@ from sklearn.model_selection import cross_val_score
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.naive_bayes import GaussianNB
 from sklearn.metrics import mean_absolute_error, mean_squared_error,mean_squared_log_error, r2_score,mean_absolute_percentage_error
-
-matplotlib.rcParams['figure.figsize'] = (12,8)
 
 pd.options.mode.chained_assignment = None
 
