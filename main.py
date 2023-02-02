@@ -5,7 +5,6 @@ import numpy as np
 import pickle
 import pandas as pd
 import numpy as np
-import scipy.stats as sts
 from sklearn.feature_selection import SelectKBest
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.feature_selection import chi2
