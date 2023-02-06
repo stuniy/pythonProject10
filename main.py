@@ -48,8 +48,8 @@ pd.options.mode.chained_assignment = None
 
 def print_hi():
     df = pd.read_csv('input.csv')
-    st.title("MLP Predictor")
-    st.subheader("Welcome to our Application")
+    st.markdown("<h1 style='text-align: center; color: grey;'>Прогнозирование послеоперационных осложнений</h1>", unsafe_allow_html=True)
+    #st.subheader("Welcome to our Application")
     # load model
     x = df.iloc[:, 0:15]
     y = df.iloc[:, -1]
@@ -61,17 +61,24 @@ def print_hi():
     # обучение на сокращенном наборе k-best
     knn, pred2 = pred('knn', x_train, x_test, y_train)
     acc2 = accuracy_model(y_test, pred2)
+    #columns = st.columns((2, 1, 2))
+    option = st.selectbox('How would you like to be contacted?',
+        ('Email', 'Home phone', 'Mobile phone'))
 
-    if st.button("Analyze"):
+    if st.button("Загрузка выборки"):
+        st.dataframe(df.head())
+
+    if st.button("Обучение модели"):
         t=round(acc2, 3) * 100
-        if t >50:
+        if t > 50:
             custom_emoji = ':blush:'
-            st.info('Happy : {}'.format(custom_emoji))
-            st.success("Точность модели: {}".format(t))
+            st.info('{}'.format(custom_emoji))
+            st.success("Точность модели: {:9.2f}".format(t))
         else:
             custom_emoji = ':confused:'
-            st.info('Confused : {}'.format(custom_emoji))
-            st.success("Polarity Score is: {}".format(t))
+            st.info('{}'.format(custom_emoji))
+            st.success("Точность модели: {:9.2f}".format(t))
+
 
 
 def k_best(x,y):
