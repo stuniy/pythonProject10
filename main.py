@@ -21,7 +21,7 @@ pd.options.mode.chained_assignment = None
 
 def print_hi():
     df = pd.read_csv('input.csv')
-    st.markdown("<h1 style='text-align: center; color: grey;'>Прогнозирование послеоперационных осложнений</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center; color: black;'>Прогнозирование послеоперационных осложнений</h1>", unsafe_allow_html=True)
     # load model
     x = df.iloc[:, 0:15]
     y = df.iloc[:, -1]
@@ -56,7 +56,7 @@ def print_hi():
                 st.write(df.isnull().sum())
 
             if st.sidebar.checkbox('Информативные показатели'):
-                st.markdown('#### Используя метод фльтрации Хи2 для отбра показателей мы получили следующий результат. Наиболее информативными показателями являются:')
+                st.markdown('#### Используя метод фльтрации Хи2 для отбра показателей мы получили следующий результат.\n Наиболее информативными показателями являются:')
                 st.write(drop_list1)
 
     elif option == 'Обучение':
