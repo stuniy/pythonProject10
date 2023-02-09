@@ -194,7 +194,6 @@ def print_hi():
         # Print shape and description of the data
         st.set_option('deprecation.showPyplotGlobalUse', False)
         if st.sidebar.checkbox('Классифицировать пациента?'):
-            st.title("Предсказание осложнений после операции")
             bilirubin = st.number_input("Билирубин")
             neutrophils = st.number_input("Нейрофилы")
             amylase = st.number_input("Амилазе")
@@ -203,7 +202,7 @@ def print_hi():
             if st.button("Прогноз"):
                 # тестирование
                 pred9 = knn.predict([[bilirubin, neutrophils, amylase, duration, lymphocytes]])
-                st.success(pred9.round(1)[0], "condition")
+                st.success(pred9.round(1)[0])
 
 
 def k_best(x,y):
