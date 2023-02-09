@@ -22,7 +22,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 def print_hi():
-    global x,y, x_train, x_test, y_train, y_test, knn, pred2, acc2
+    global x,y, knn, pred2, acc2
     df = pd.read_csv('input.csv')
     st.markdown("<h1 style='text-align: center; color: black;'>Прогнозирование послеоперационных осложнений</h1>", unsafe_allow_html=True)
 
@@ -59,6 +59,9 @@ def print_hi():
                 st.write(drop_list1)
 
     elif option == 'Обучение':
+        # обучение на сокращенном наборе k-best
+        global x_train, x_test, y_train, y_test
+
         st.sidebar.subheader(' Исследование')
         st.set_option('deprecation.showPyplotGlobalUse', False)
 
