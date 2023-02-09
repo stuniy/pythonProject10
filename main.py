@@ -30,8 +30,8 @@ def print_hi():
     # обучение на сокращенном наборе k-best
     x_train, x_test, y_train, y_test = scal(x_k, y, size=0.4)
     # обучение на сокращенном наборе k-best
-    knn, pred2 = pred('knn', x_train, x_test, y_train)
-    acc2 = accuracy_model(y_test, pred2)
+    #knn, pred2 = pred('knn', x_train, x_test, y_train)
+    #acc2 = accuracy_model(y_test, pred2)
 
     option = st.sidebar.selectbox('Mode', ['Загрузка выборки', 'Обучение', 'Тестирование'])
 
@@ -75,15 +75,21 @@ def print_hi():
             st.write('X_test: ', x_test.shape)
             st.write('y_test: ', y_test.shape)
 
-        t = round(acc2, 3) * 100
-        if t > 50:
-            custom_emoji = ':blush:'
-            st.info('{}'.format(custom_emoji))
-            st.success("Точность модели: {:9.2f}".format(t))
-        else:
-            custom_emoji = ':confused:'
-            st.info('{}'.format(custom_emoji))
-            st.success("Точность модели: {:9.2f}".format(t))
+        model = st.sidebar.selectbox('Mode', ['Логистическая регрессия', 'К-ближайший соседей', 'Дерево решений', 'Метод опорных векторов', 'Многослойный персептрон', 'Случайный лес'])
+        if model == 'Логистическая регрессия':
+            vid = 'log'
+            # обучение на сокращенном наборе k-best
+            knn, pred2 = pred(vid, x_train, x_test, y_train)
+            acc2 = accuracy_model(y_test, pred2)
+            t = round(acc2, 3) * 100
+            if t > 50:
+                custom_emoji = ':blush:'
+                st.info('{}'.format(custom_emoji))
+                st.success("Точность модели: {:9.2f}".format(t))
+            else:
+                custom_emoji = ':confused:'
+                st.info('{}'.format(custom_emoji))
+                st.success("Точность модели: {:9.2f}".format(t))
 
     elif option == "Тестирование":
 
