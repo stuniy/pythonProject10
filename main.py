@@ -30,8 +30,6 @@ def print_hi():
     # обучение на сокращенном наборе k-best
     x_train, x_test, y_train, y_test = scal(x_k, y)
     # обучение на сокращенном наборе k-best
-    x_train, x_test, y_train, y_test = scal(x_k, y)
-    # обучение на сокращенном наборе k-best
     knn, pred2 = pred('knn', x_train, x_test, y_train)
     acc2 = accuracy_model(y_test, pred2)
 
@@ -60,8 +58,13 @@ def print_hi():
                 st.write(drop_list1)
 
     elif option == 'Обучение':
-        st.sidebar.subheader(' Quick  Explore')
-        st.markdown("Установите флажок на боковой панели, чтобы просмотреть набор данных.")
+        st.sidebar.subheader(' Исследование')
+        st.set_option('deprecation.showPyplotGlobalUse', False)
+        if st.sidebar.checkbox('Показать набор для обучения'):
+            st.write(df.head(100))
+            st.write('Размер выборки: ', x_k.shape)
+            st.write('Статистика: \n', x_k.describe())
+
         t = round(acc2, 3) * 100
         if t > 50:
             custom_emoji = ':blush:'
