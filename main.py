@@ -26,7 +26,7 @@ def print_hi():
     x = df.iloc[:, 0:15]
     y = df.iloc[:, -1]
     # select
-    feature_score, x_k, f_s1 = k_best(x, y)
+    feature_score, x_k, f_s1,drop_list1 = k_best(x, y)
     # обучение на сокращенном наборе k-best
     x_train, x_test, y_train, y_test = scal(x_k, y)
     # обучение на сокращенном наборе k-best
@@ -56,8 +56,8 @@ def print_hi():
                 st.write(df.isnull().sum())
 
             if st.sidebar.checkbox('Информативные показатели'):
-                st.subheader('Информативные показатели')
-                st.write(f_s1)
+                st.subheader('Используя метод фльтрации Хи2 для отбра показателей мы получили следующий результат. Наиболее информативными показателями являются:')
+                st.write(drop_list1)
 
     elif option == 'Обучение':
         st.sidebar.subheader(' Quick  Explore')
@@ -109,7 +109,7 @@ def k_best(x,y):
     print(drop_list1)
     print('Создадим новую выборку состоящую толко из этих показателей.')
     print(x_1)
-    return feature_score,x_1,f_s1
+    return feature_score,x_1,f_s1,drop_list1
 
 def scal(x,y):
 #шкалируем весь набор данных
