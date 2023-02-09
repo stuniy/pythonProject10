@@ -39,8 +39,6 @@ def print_hi():
 
     if option == "Загрузка выборки":
         st.dataframe(df.head())
-    elif option == 'Обучение':
-
         st.sidebar.subheader(' Quick  Explore')
         st.markdown("Tick the box on the side panel to explore the dataset.")
         if st.sidebar.checkbox('Basic Info'):
@@ -56,6 +54,20 @@ def print_hi():
             if st.sidebar.checkbox('Missing Values?'):
                 st.subheader('Missing values')
                 st.write(df.isnull().sum())
+
+    elif option == 'Обучение':
+        st.sidebar.subheader(' Quick  Explore')
+        st.markdown("Tick the box on the side panel to explore the dataset.")
+        t = round(acc2, 3) * 100
+        if t > 50:
+            custom_emoji = ':blush:'
+            st.info('{}'.format(custom_emoji))
+            st.success("Точность модели: {:9.2f}".format(t))
+        else:
+            custom_emoji = ':confused:'
+            st.info('{}'.format(custom_emoji))
+            st.success("Точность модели: {:9.2f}".format(t))
+
     elif option == "Тестирование":
 
         # Print shape and description of the data
@@ -72,18 +84,6 @@ def print_hi():
             st.write('Claim cases are: %.3f%%' % outlier_percentage)
             st.write('Claim Cases: ', len(fraud))
             st.write('Valid Cases: ', len(valid))
-    if st.button("Обучение модели"):
-        t=round(acc2, 3) * 100
-        if t > 50:
-            custom_emoji = ':blush:'
-            st.info('{}'.format(custom_emoji))
-            st.success("Точность модели: {:9.2f}".format(t))
-        else:
-            custom_emoji = ':confused:'
-            st.info('{}'.format(custom_emoji))
-            st.success("Точность модели: {:9.2f}".format(t))
-
-
 
 def k_best(x,y):
     bestfeature=SelectKBest(score_func=chi2,k='all')
