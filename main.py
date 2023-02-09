@@ -19,7 +19,6 @@ from sklearn.metrics import confusion_matrix,accuracy_score, f1_score, recall_sc
 
 pd.options.mode.chained_assignment = None
 import matplotlib.pyplot as plt
-import seaborn as sns
 
 def print_hi():
     df = pd.read_csv('input.csv')
