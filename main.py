@@ -60,11 +60,15 @@ def print_hi():
     elif option == 'Обучение':
         st.sidebar.subheader(' Исследование')
         st.set_option('deprecation.showPyplotGlobalUse', False)
+
         if st.sidebar.checkbox('Показать набор для обучения'):
-            st.write(df.head(100))
+            st.write(x_k.head(50))
             st.write('Размер выборки: ', x_k.shape)
             st.write('Статистика: \n', x_k.describe())
 
+        size = st.sidebar.slider('Установите размер тестовой выборки', min_value=0.2, max_value=0.4)
+        # обучение на сокращенном наборе k-best
+        x_train, x_test, y_train, y_test = scal(x_k, y,size)
         t = round(acc2, 3) * 100
         if t > 50:
             custom_emoji = ':blush:'
@@ -114,14 +118,14 @@ def k_best(x,y):
     print(x_1)
     return feature_score,x_1,f_s1,drop_list1
 
-def scal(x,y):
+def scal(x,y,size):
 #шкалируем весь набор данных
     scaler = MinMaxScaler(feature_range=(0,1))
 #назначение показателейдля шклирования
     x_scaled = pd.DataFrame(scaler.fit_transform(x), columns=x.columns)
 # обучающая и тестовая выборки по полным данным
 # деление на обучающую и тестовую выборки: 80 % - 20 %
-    x_train, x_test, y_train, y_test = train_test_split(x_scaled, y, test_size = 0.3)
+    x_train, x_test, y_train, y_test = train_test_split(x_scaled, y, test_size = size)
     return x_train, x_test, y_train, y_test
 
 # определяем функцию для оценки модели
