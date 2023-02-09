@@ -200,11 +200,10 @@ def print_hi():
             amylase = st.number_input("Амилазе")
             duration = st.number_input("Длительность операции")
             lymphocytes = st.number_input("Лимфоциты")
-
-            # тестирование
-            input = [[12.8, 9, 18.2, 150, 21]]
-            pred9 = knn.predict([[bilirubin, neutrophils, amylase, duration, lymphocytes]])
-            st.success(pred9.round(1)[0], "condition")
+            if st.button("Прогноз"):
+                # тестирование
+                pred9 = knn.predict([[bilirubin, neutrophils, amylase, duration, lymphocytes]])
+                st.success(pred9.round(1)[0], "condition")
 
 
 def k_best(x,y):
