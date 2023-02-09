@@ -82,35 +82,35 @@ def print_hi():
             knn, pred2 = pred(vid, x_train, x_test, y_train)
             acc2 = accuracy_model(y_test, pred2)
             t = round(acc2, 3) * 100
-            st.success("Точность {0} модели: {1:9.2f}".format(model,t))
+            st.success("Точность  модели {0}: {1:9.2f}".format(model,t))
         if model == 'К-ближайший соседей':
             vid = 'knn'
             # обучение на сокращенном наборе k-best
             knn, pred2 = pred(vid, x_train, x_test, y_train)
             acc2 = accuracy_model(y_test, pred2)
             t = round(acc2, 3) * 100
-            st.success("Точность модели: {:9.2f}".format(t))
+            st.success("Точность  модели {0}: {1:9.2f}".format(model,t))
         if model == 'Дерево решений':
             vid = 'tree'
             # обучение на сокращенном наборе k-best
             knn, pred2 = pred(vid, x_train, x_test, y_train)
             acc2 = accuracy_model(y_test, pred2)
             t = round(acc2, 3) * 100
-            st.success("Точность модели: {:9.2f}".format(t))
+            st.success("Точность  модели {0}: {1:9.2f}".format(model,t))
         if model == 'Метод опорных векторов':
             vid = 'svm'
             # обучение на сокращенном наборе k-best
             knn, pred2 = pred(vid, x_train, x_test, y_train)
             acc2 = accuracy_model(y_test, pred2)
             t = round(acc2, 3) * 100
-            st.success("Точность модели: {:9.2f}".format(t))
+            st.success("Точность  модели {0}: {1:9.2f}".format(model,t))
         if model == 'Многослойный персептрон':
             vid = 'mlp'
             # обучение на сокращенном наборе k-best
             knn, pred2 = pred(vid, x_train, x_test, y_train)
             acc2 = accuracy_model(y_test, pred2)
             t = round(acc2, 3) * 100
-            st.success("Точность модели: {:9.2f}".format(t))
+            st.success("Точность  модели {0}: {1:9.2f}".format(model,t))
         if model == 'Случайный лес':
             vid = 'for'
             # обучение на сокращенном наборе k-best
@@ -120,11 +120,11 @@ def print_hi():
             if t > 50:
                 custom_emoji = ':blush:'
                 st.info('{}'.format(custom_emoji))
-                st.success("Точность модели: {:9.2f}".format(t))
+                st.success("Точность  модели {0}: {1:9.2f}".format(model,t))
             else:
                 custom_emoji = ':confused:'
                 st.info('{}'.format(custom_emoji))
-                st.success("Точность модели: {:9.2f}".format(t))
+                st.success("Точность  модели {0}: {1:9.2f}".format(model,t))
     elif option == "Тестирование":
         # Print shape and description of the data
         st.set_option('deprecation.showPyplotGlobalUse', False)
