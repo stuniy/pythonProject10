@@ -57,7 +57,7 @@ def print_hi():
 
             if st.sidebar.checkbox('Информативные показатели'):
                 st.subheader('Информативные показатели')
-                st.write(feature_score)
+                st.write(x_k)
 
     elif option == 'Обучение':
         st.sidebar.subheader(' Quick  Explore')
