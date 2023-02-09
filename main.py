@@ -22,7 +22,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 def print_hi():
-    global x,y, knn, pred2, acc2
+    global x,y, knn, pred2, acc2, feature_score, x_k, f_s1, drop_list1,x_train, x_test, y_train, y_test
     df = pd.read_csv('input.csv')
     st.markdown("<h1 style='text-align: center; color: black;'>Прогнозирование послеоперационных осложнений</h1>", unsafe_allow_html=True)
 
@@ -33,9 +33,9 @@ def print_hi():
     option = st.sidebar.selectbox('Mode', ['Загрузка выборки', 'Обучение', 'Тестирование'])
 
     if option == "Загрузка выборки":
-        global feature_score, x_k, f_s1, drop_list1
+
         # select
-        feature_score, x_k, f_s1, drop_list1 = k_best(x, y)
+        globals()['feature_score', 'x_k', 'f_s1', 'drop_list1'] = k_best(x, y)
 
         st.dataframe(df.head())
         st.sidebar.subheader(' Исследование')
@@ -59,9 +59,6 @@ def print_hi():
                 st.write(drop_list1)
 
     elif option == 'Обучение':
-        # обучение на сокращенном наборе k-best
-        global x_train, x_test, y_train, y_test
-
         st.sidebar.subheader(' Исследование')
         st.set_option('deprecation.showPyplotGlobalUse', False)
 
