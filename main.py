@@ -82,7 +82,7 @@ def print_hi():
             knn, pred2 = pred(vid, x_train, x_test, y_train)
             acc2 = accuracy_model(y_test, pred2)
             t = round(acc2, 3) * 100
-            st.success("Точность {model} модели: {:9.2f}".format(model,t))
+            st.success("Точность {0} модели: {1:9.2f}".format(model,t))
         if model == 'К-ближайший соседей':
             vid = 'knn'
             # обучение на сокращенном наборе k-best
