@@ -93,7 +93,7 @@ def print_hi():
                 fig, ax = plt.subplots()
                 ax.xaxis.set_label_position("top")
                 plt.tight_layout()
-                plt.title('Confusion matrix \n', y=1.1)
+                plt.title('Матрица неточности \n', y=1.1)
                 sns.heatmap(pd.DataFrame(cnf_matrix), annot=True, cmap="Reds", fmt='g')
                 st.write(fig)
 
@@ -104,6 +104,16 @@ def print_hi():
             acc2 = accuracy_model(y_test, pred2)
             t = round(acc2, 3) * 100
             st.success("Точность  модели {0}: {1:9.2f}".format(model,t))
+            if st.sidebar.checkbox('Показать матрицу неточности'):
+                # матрица неточности
+                cnf_matrix = confusion_matrix(y_test, pred2)
+
+                fig, ax = plt.subplots()
+                ax.xaxis.set_label_position("top")
+                plt.tight_layout()
+                plt.title('Матрица неточности \n', y=1.1)
+                sns.heatmap(pd.DataFrame(cnf_matrix), annot=True, cmap="Reds", fmt='g')
+                st.write(fig)
         if model == 'Дерево решений':
             vid = 'tree'
             # обучение на сокращенном наборе k-best
@@ -111,6 +121,16 @@ def print_hi():
             acc2 = accuracy_model(y_test, pred2)
             t = round(acc2, 3) * 100
             st.success("Точность  модели {0}: {1:9.2f}".format(model,t))
+            if st.sidebar.checkbox('Показать матрицу неточности'):
+                # матрица неточности
+                cnf_matrix = confusion_matrix(y_test, pred2)
+
+                fig, ax = plt.subplots()
+                ax.xaxis.set_label_position("top")
+                plt.tight_layout()
+                plt.title('Матрица неточности \n', y=1.1)
+                sns.heatmap(pd.DataFrame(cnf_matrix), annot=True, cmap="Reds", fmt='g')
+                st.write(fig)
         if model == 'Метод опорных векторов':
             vid = 'svm'
             # обучение на сокращенном наборе k-best
@@ -118,6 +138,16 @@ def print_hi():
             acc2 = accuracy_model(y_test, pred2)
             t = round(acc2, 3) * 100
             st.success("Точность  модели {0}: {1:9.2f}".format(model,t))
+            if st.sidebar.checkbox('Показать матрицу неточности'):
+                # матрица неточности
+                cnf_matrix = confusion_matrix(y_test, pred2)
+
+                fig, ax = plt.subplots()
+                ax.xaxis.set_label_position("top")
+                plt.tight_layout()
+                plt.title('Матрица неточности \n', y=1.1)
+                sns.heatmap(pd.DataFrame(cnf_matrix), annot=True, cmap="Reds", fmt='g')
+                st.write(fig)
         if model == 'Многослойный персептрон':
             vid = 'mlp'
             # обучение на сокращенном наборе k-best
@@ -125,6 +155,16 @@ def print_hi():
             acc2 = accuracy_model(y_test, pred2)
             t = round(acc2, 3) * 100
             st.success("Точность  модели {0}: {1:9.2f}".format(model,t))
+            if st.sidebar.checkbox('Показать матрицу неточности'):
+                # матрица неточности
+                cnf_matrix = confusion_matrix(y_test, pred2)
+
+                fig, ax = plt.subplots()
+                ax.xaxis.set_label_position("top")
+                plt.tight_layout()
+                plt.title('Матрица неточности \n', y=1.1)
+                sns.heatmap(pd.DataFrame(cnf_matrix), annot=True, cmap="Reds", fmt='g')
+                st.write(fig)
         if model == 'Случайный лес':
             vid = 'for'
             # обучение на сокращенном наборе k-best
@@ -139,6 +179,16 @@ def print_hi():
                 custom_emoji = ':confused:'
                 st.info('{}'.format(custom_emoji))
                 st.success("Точность  модели {0}: {1:9.2f}".format(model,t))
+            if st.sidebar.checkbox('Показать матрицу неточности'):
+                # матрица неточности
+                cnf_matrix = confusion_matrix(y_test, pred2)
+
+                fig, ax = plt.subplots()
+                ax.xaxis.set_label_position("top")
+                plt.tight_layout()
+                plt.title('Матрица неточности \n', y=1.1)
+                sns.heatmap(pd.DataFrame(cnf_matrix), annot=True, cmap="Reds", fmt='g')
+                st.write(fig)
     elif option == "Тестирование":
         # Print shape and description of the data
         st.set_option('deprecation.showPyplotGlobalUse', False)
