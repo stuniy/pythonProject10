@@ -69,6 +69,12 @@ def print_hi():
         size = st.sidebar.slider('Установите размер тестовой выборки', min_value=0.2, max_value=0.4)
         # обучение на сокращенном наборе k-best
         x_train, x_test, y_train, y_test = scal(x_k, y,size)
+        if st.sidebar.checkbox('Вывод обучающих и тестовых наборов'):
+            st.write('X_train: ', x_train.shape)
+            st.write('y_train: ', y_train.shape)
+            st.write('X_test: ', x_test.shape)
+            st.write('y_test: ', y_test.shape)
+
         t = round(acc2, 3) * 100
         if t > 50:
             custom_emoji = ':blush:'
