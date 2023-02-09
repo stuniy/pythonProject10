@@ -203,6 +203,14 @@ def print_hi():
                 # тестирование
                 pred9 = knn.predict([[bilirubin, neutrophils, amylase, duration, lymphocytes]])
                 st.success(pred9.round(1)[0])
+                if pred9 ==0:
+                    custom_emoji = ':blush:'
+                    st.info('{}'.format(custom_emoji))
+                    st.success("Осложнений нет")
+                else:
+                    custom_emoji = ':confused:'
+                    st.info('{}'.format(custom_emoji))
+                    st.success("Осложнения есть")
 
 
 def k_best(x,y):
