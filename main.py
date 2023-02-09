@@ -32,8 +32,8 @@ def print_hi():
     # обучение на сокращенном наборе k-best
     x_train, x_test, y_train, y_test = scal(x_k, y, size=0.4)
     # обучение на сокращенном наборе k-best
-    #knn, pred2 = pred('knn', x_train, x_test, y_train)
-    #acc2 = accuracy_model(y_test, pred2)
+    knn, pred2 = pred('knn', x_train, x_test, y_train)
+    acc2 = accuracy_model(y_test, pred2)
 
     option = st.sidebar.selectbox('Mode', ['Загрузка выборки', 'Обучение', 'Тестирование'])
 
@@ -189,21 +189,23 @@ def print_hi():
                 plt.title('Матрица неточности \n', y=1.1)
                 sns.heatmap(pd.DataFrame(cnf_matrix), annot=True, cmap="Reds", fmt='g')
                 st.write(fig)
+
     elif option == "Тестирование":
         # Print shape and description of the data
         st.set_option('deprecation.showPyplotGlobalUse', False)
-        if st.sidebar.checkbox('Show DataFrame'):
-            st.write(df.head(100))
-            st.write('Shape of the dataframe: ', df.shape)
-            st.write('Data description: \n', df.describe())
-        # Print valid and fraud transactions
-        fraud = df[df.ClaimNb == 1]
-        valid = df[df.ClaimNb == 0]
-        outlier_percentage = (df.ClaimNb.value_counts()[1] / df.ClaimNb.value_counts()[0]) * 100
-        if st.sidebar.checkbox('Show claim and valid transaction details'):
-            st.write('Claim cases are: %.3f%%' % outlier_percentage)
-            st.write('Claim Cases: ', len(fraud))
-            st.write('Valid Cases: ', len(valid))
+        if st.sidebar.checkbox('Классифицировать пациента?'):
+            st.title("Предсказание осложнений после операции")
+            bilirubin = st.number_input("Билирубин")
+            neutrophils = st.number_input("Нейрофилы")
+            amylase = st.number_input("Амилазе")
+            duration = st.number_input("Длительность операции")
+            lymphocytes = st.number_input("Лимфоциты")
+
+            # тестирование
+            input = [[12.8, 9, 18.2, 150, 21]]
+            pred9 = knn.predict([[bilirubin, neutrophils, amylase, duration, lymphocytes]])
+            st.success(pred9.round(1)[0], "condition")
+
 
 def k_best(x,y):
     bestfeature=SelectKBest(score_func=chi2,k='all')
