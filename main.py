@@ -85,7 +85,7 @@ def print_hi():
             t = round(acc2, 3) * 100
             st.success("Точность  модели {0}: {1:9.2f}".format(model,t))
 
-            if st.sidebar.checkbox('Показать набор для обучения'):
+            if st.sidebar.checkbox('Показать матрицу неточности'):
                 # матрица неточности
                 cnf_matrix = confusion_matrix(y_test, pred2)
 
