@@ -189,6 +189,9 @@ def print_hi():
                 plt.title('Матрица неточности \n', y=1.1)
                 sns.heatmap(pd.DataFrame(cnf_matrix), annot=True, cmap="Reds", fmt='g')
                 st.write(fig)
+        else:
+            st.success("Вы не выбрали модель")
+
 
     elif option == "Тестирование":
         # Print shape and description of the data
