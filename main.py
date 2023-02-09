@@ -202,7 +202,7 @@ def print_hi():
             if st.button("Прогноз"):
                 # тестирование
                 pred9 = knn.predict([[bilirubin, neutrophils, amylase, duration, lymphocytes]])
-                st.success(pred9.round(1)[0])
+                #st.success(pred9.round(1)[0])
                 if pred9 ==0:
                     custom_emoji = ':blush:'
                     st.info('{}'.format(custom_emoji))
