@@ -39,25 +39,25 @@ def print_hi():
 
     if option == "Загрузка выборки":
         st.dataframe(df.head())
-        st.sidebar.subheader(' Quick  Explore')
-        st.markdown("Tick the box on the side panel to explore the dataset.")
-        if st.sidebar.checkbox('Basic Info'):
+        st.sidebar.subheader(' Исследование')
+        st.markdown("Установите флажок на боковой панели, чтобы просмотреть набор данных.")
+        if st.sidebar.checkbox('Основная информация'):
 
-            if st.sidebar.checkbox("Show Columns"):
-                st.subheader('Show Columns List')
+            if st.sidebar.checkbox("Показать столбцы"):
+                st.subheader('Список столбцов')
                 all_columns = df.columns.to_list()
                 st.write(all_columns)
 
-            if st.sidebar.checkbox('Statistical Description'):
-                st.subheader('Statistical Data Description')
+            if st.sidebar.checkbox('Статистика'):
+                st.subheader('Описание статистических данных')
                 st.write(df.describe())
-            if st.sidebar.checkbox('Missing Values?'):
-                st.subheader('Missing values')
+            if st.sidebar.checkbox('Пропуски?'):
+                st.subheader('Наличие пропусков')
                 st.write(df.isnull().sum())
 
     elif option == 'Обучение':
         st.sidebar.subheader(' Quick  Explore')
-        st.markdown("Tick the box on the side panel to explore the dataset.")
+        st.markdown("Установите флажок на боковой панели, чтобы просмотреть набор данных.")
         t = round(acc2, 3) * 100
         if t > 50:
             custom_emoji = ':blush:'
