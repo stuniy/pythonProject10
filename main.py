@@ -18,6 +18,8 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import confusion_matrix,accuracy_score, f1_score, recall_score, precision_score, roc_curve, roc_auc_score, auc
 
 pd.options.mode.chained_assignment = None
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 def print_hi():
     df = pd.read_csv('input.csv')
@@ -83,6 +85,17 @@ def print_hi():
             acc2 = accuracy_model(y_test, pred2)
             t = round(acc2, 3) * 100
             st.success("Точность  модели {0}: {1:9.2f}".format(model,t))
+
+            if st.sidebar.checkbox('Показать набор для обучения'):
+                # матрица неточности
+                cnf_matrix = confusion_matrix(y_test, pred2)
+
+                fig, ax = plt.subplots()
+                ax.xaxis.set_label_position("top")
+                plt.tight_layout()
+                plt.title('Confusion matrix \n', y=1.1)
+                st.heatmap(pd.DataFrame(cnf_matrix), annot=True, cmap="Reds", fmt='g')
+
         if model == 'К-ближайший соседей':
             vid = 'knn'
             # обучение на сокращенном наборе k-best
