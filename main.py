@@ -35,36 +35,43 @@ def print_hi():
     knn, pred2 = pred('knn', x_train, x_test, y_train)
     acc2 = accuracy_model(y_test, pred2)
     #columns = st.columns((2, 1, 2))
-    option = st.sidebar.selectbox('Mode', ['About', 'EDA', 'Analysis'])
+    option = st.sidebar.selectbox('Mode', ['Загрузка выборки', 'Обучение', 'Тестирование'])
 
-    if option == "About":
-        st.markdown('Claims Prediction Example')
-
-        st.markdown(
-            """
-            <style>
-            [data-testid="stSidebar"][aria-expanded="true"] > div:first-child{
-                width: 350px
-            }
-            [data-testid="stSidebar"][aria-expanded="false"] > div:first-child{
-                width: 350px
-                margin-left: -350px
-            }
-            </style>
-            """,
-
-            unsafe_allow_html=True,
-        )
-
-        st.markdown('')
-
-        st.markdown(
-            'This dashboard allows you to follow the claims prediction example. It can help you to understand how we can focus on claims and in this way develop proper pricing for insurance products.')
-
-
-    if st.button("Загрузка выборки"):
+    if option == "Загрузка выборки":
         st.dataframe(df.head())
+    elif option == 'Обучение':
 
+        st.sidebar.subheader(' Quick  Explore')
+        st.markdown("Tick the box on the side panel to explore the dataset.")
+        if st.sidebar.checkbox('Basic Info'):
+
+            if st.sidebar.checkbox("Show Columns"):
+                st.subheader('Show Columns List')
+                all_columns = df.columns.to_list()
+                st.write(all_columns)
+
+            if st.sidebar.checkbox('Statistical Description'):
+                st.subheader('Statistical Data Description')
+                st.write(df.describe())
+            if st.sidebar.checkbox('Missing Values?'):
+                st.subheader('Missing values')
+                st.write(df.isnull().sum())
+    elif option == "Тестирование":
+
+        # Print shape and description of the data
+        st.set_option('deprecation.showPyplotGlobalUse', False)
+        if st.sidebar.checkbox('Show DataFrame'):
+            st.write(df.head(100))
+            st.write('Shape of the dataframe: ', df.shape)
+            st.write('Data description: \n', df.describe())
+        # Print valid and fraud transactions
+        fraud = df[df.ClaimNb == 1]
+        valid = df[df.ClaimNb == 0]
+        outlier_percentage = (df.ClaimNb.value_counts()[1] / df.ClaimNb.value_counts()[0]) * 100
+        if st.sidebar.checkbox('Show claim and valid transaction details'):
+            st.write('Claim cases are: %.3f%%' % outlier_percentage)
+            st.write('Claim Cases: ', len(fraud))
+            st.write('Valid Cases: ', len(valid))
     if st.button("Обучение модели"):
         t=round(acc2, 3) * 100
         if t > 50:
