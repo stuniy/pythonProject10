@@ -2,47 +2,20 @@ import streamlit as st
 import altair as alt
 import pandas as pd
 import numpy as np
-import pickle
-import pandas as pd
-import numpy as np
+
 from sklearn.feature_selection import SelectKBest
-from sklearn.ensemble import RandomForestClassifier
 from sklearn.feature_selection import chi2
 from sklearn.preprocessing import MinMaxScaler
-from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 
 from sklearn.linear_model import LogisticRegression
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier, plot_tree
 from sklearn.svm import SVC
-from sklearn.linear_model import Perceptron
 from sklearn.neural_network import MLPClassifier
 from sklearn.ensemble import RandomForestClassifier
 
-from sklearn.metrics import confusion_matrix
-from sklearn.metrics import accuracy_score
-from sklearn.metrics import f1_score
-from sklearn.metrics import recall_score
-from sklearn.metrics import precision_score
-from sklearn.metrics import roc_curve
-from sklearn.metrics import roc_auc_score
-from sklearn.metrics import auc
-
-import itertools
-from sklearn.datasets import make_friedman1
-from sklearn.feature_selection import RFE
-from sklearn.feature_selection import RFECV
-from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier
-from sklearn.linear_model import RidgeCV
-from sklearn.ensemble import StackingClassifier
-from sklearn.ensemble import GradientBoostingClassifier
-from sklearn.ensemble import VotingClassifier
-from sklearn.naive_bayes import GaussianNB
-from sklearn.model_selection import cross_val_score
-from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
-from sklearn.naive_bayes import GaussianNB
-from sklearn.metrics import mean_absolute_error, mean_squared_error,mean_squared_log_error, r2_score,mean_absolute_percentage_error
+from sklearn.metrics import confusion_matrix,accuracy_score, f1_score, recall_score, precision_score, roc_curve, roc_auc_score, auc
 
 pd.options.mode.chained_assignment = None
 
@@ -62,8 +35,32 @@ def print_hi():
     knn, pred2 = pred('knn', x_train, x_test, y_train)
     acc2 = accuracy_model(y_test, pred2)
     #columns = st.columns((2, 1, 2))
-    option = st.selectbox('How would you like to be contacted?',
-        ('Email', 'Home phone', 'Mobile phone'))
+    option = st.sidebar.selectbox('Mode', ['About', 'EDA', 'Analysis'])
+
+    if option == "About":
+        st.markdown('Claims Prediction Example')
+
+        st.markdown(
+            """
+            <style>
+            [data-testid="stSidebar"][aria-expanded="true"] > div:first-child{
+                width: 350px
+            }
+            [data-testid="stSidebar"][aria-expanded="false"] > div:first-child{
+                width: 350px
+                margin-left: -350px
+            }
+            </style>
+            """,
+
+            unsafe_allow_html=True,
+        )
+
+        st.markdown('')
+
+        st.markdown(
+            'This dashboard allows you to follow the claims prediction example. It can help you to understand how we can focus on claims and in this way develop proper pricing for insurance products.')
+
 
     if st.button("Загрузка выборки"):
         st.dataframe(df.head())
