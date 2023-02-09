@@ -22,21 +22,23 @@ pd.options.mode.chained_assignment = None
 def print_hi():
     df = pd.read_csv('input.csv')
     st.markdown("<h1 style='text-align: center; color: grey;'>Прогнозирование послеоперационных осложнений</h1>", unsafe_allow_html=True)
-
-    #scal
+    # load model
+    x = df.iloc[:, 0:15]
+    y = df.iloc[:, -1]
+    # select
+    feature_score, x_k, f_s1 = k_best(x, y)
+    # обучение на сокращенном наборе k-best
+    x_train, x_test, y_train, y_test = scal(x_k, y)
     # обучение на сокращенном наборе k-best
     x_train, x_test, y_train, y_test = scal(x_k, y)
     # обучение на сокращенном наборе k-best
     knn, pred2 = pred('knn', x_train, x_test, y_train)
     acc2 = accuracy_model(y_test, pred2)
-    #columns = st.columns((2, 1, 2))
+
     option = st.sidebar.selectbox('Mode', ['Загрузка выборки', 'Обучение', 'Тестирование'])
 
     if option == "Загрузка выборки":
         st.dataframe(df.head())
-        # load model
-        x = df.iloc[:, 0:15]
-        y = df.iloc[:, -1]
         st.sidebar.subheader(' Исследование')
         st.markdown("Установите флажок на боковой панели, чтобы просмотреть набор данных.")
         if st.sidebar.checkbox('Основная информация'):
@@ -55,8 +57,6 @@ def print_hi():
 
             if st.sidebar.checkbox('Информативные показатели'):
                 st.subheader('Информативные показатели')
-                # select
-                feature_score, x_k, f_s1 = k_best(x, y)
                 st.write(feature_score)
 
     elif option == 'Обучение':
