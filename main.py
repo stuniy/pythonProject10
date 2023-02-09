@@ -29,7 +29,15 @@ def print_hi():
     # load model
     x = df.iloc[:, 0:15]
     y = df.iloc[:, -1]
+    # select
+    feature_score, x_k, f_s1, drop_list1 = k_best(x, y)
 
+    # обучение на сокращенном наборе k-best
+    x_train, x_test, y_train, y_test = scal(x_k, y, size=0.3)
+
+    # обучение на сокращенном наборе k-best
+    knn, pred2 = pred('knn', x_train, x_test, y_train)
+    acc2 = accuracy_model(y_test, pred2)
     option = st.sidebar.selectbox('Mode', ['Загрузка выборки', 'Обучение', 'Тестирование'])
 
     if option == "Загрузка выборки":
@@ -52,8 +60,6 @@ def print_hi():
                 st.write(df.isnull().sum())
 
             if st.sidebar.checkbox('Информативные показатели'):
-                # select
-                globals()['feature_score', 'x_k', 'f_s1', 'drop_list1'] = k_best(x, y)
                 st.markdown('#### Используя метод фльтрации Хи2 для отбра показателей мы получили следующий результат.\n #### Наиболее информативными показателями являются:')
                 st.write(drop_list1)
 
