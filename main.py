@@ -22,9 +22,10 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 def print_hi():
+    global x,y, feature_score, x_k, f_s1, drop_list1, x_train, x_test, y_train, y_test, knn, pred2, acc2
     df = pd.read_csv('input.csv')
     st.markdown("<h1 style='text-align: center; color: black;'>Прогнозирование послеоперационных осложнений</h1>", unsafe_allow_html=True)
-    global x,y, feature_score, x_k, f_s1, drop_list1, x_train, x_test, y_train, y_test, knn, pred2, acc2
+
     # load model
     x = df.iloc[:, 0:15]
     y = df.iloc[:, -1]
@@ -32,9 +33,10 @@ def print_hi():
     option = st.sidebar.selectbox('Mode', ['Загрузка выборки', 'Обучение', 'Тестирование'])
 
     if option == "Загрузка выборки":
+        # select
+        feature_score, x_k, f_s1, drop_list1 = k_best(x, y)
 
         st.dataframe(df.head())
-
         st.sidebar.subheader(' Исследование')
         st.markdown("Установите флажок на боковой панели, чтобы просмотреть набор данных.")
         if st.sidebar.checkbox('Основная информация'):
@@ -52,8 +54,6 @@ def print_hi():
                 st.write(df.isnull().sum())
 
             if st.sidebar.checkbox('Информативные показатели'):
-                # select
-                feature_score, x_k, f_s1, drop_list1 = k_best(x, y)
                 st.markdown('#### Используя метод фльтрации Хи2 для отбра показателей мы получили следующий результат.\n #### Наиболее информативными показателями являются:')
                 st.write(drop_list1)
 
