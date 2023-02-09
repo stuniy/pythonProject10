@@ -28,7 +28,7 @@ def print_hi():
     # select
     feature_score, x_k, f_s1,drop_list1 = k_best(x, y)
     # обучение на сокращенном наборе k-best
-    x_train, x_test, y_train, y_test = scal(x_k, y)
+    x_train, x_test, y_train, y_test = scal(x_k, y, size=0.4)
     # обучение на сокращенном наборе k-best
     knn, pred2 = pred('knn', x_train, x_test, y_train)
     acc2 = accuracy_model(y_test, pred2)
