@@ -29,6 +29,7 @@ def print_hi():
     option = st.sidebar.selectbox('Mode', ['Загрузка выборки', 'Обучение', 'Тестирование'])
 
     if option == "Загрузка выборки":
+        nonlocal x, y, feature_score, x_k, f_s1, drop_list1, x_train, x_test, y_train, y_test, knn, pred2, acc2
         st.dataframe(df.head())
         # load model
         x = df.iloc[:, 0:15]
