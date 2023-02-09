@@ -34,9 +34,6 @@ def print_hi():
 
     if option == "Загрузка выборки":
 
-        # select
-        globals()['feature_score', 'x_k', 'f_s1', 'drop_list1'] = k_best(x, y)
-
         st.dataframe(df.head())
         st.sidebar.subheader(' Исследование')
         st.markdown("Установите флажок на боковой панели, чтобы просмотреть набор данных.")
@@ -55,6 +52,8 @@ def print_hi():
                 st.write(df.isnull().sum())
 
             if st.sidebar.checkbox('Информативные показатели'):
+                # select
+                globals()['feature_score', 'x_k', 'f_s1', 'drop_list1'] = k_best(x, y)
                 st.markdown('#### Используя метод фльтрации Хи2 для отбра показателей мы получили следующий результат.\n #### Наиболее информативными показателями являются:')
                 st.write(drop_list1)
 
